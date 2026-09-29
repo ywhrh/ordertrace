@@ -1,0 +1,31 @@
+server:
+  address: 127.0.0.1
+  port: ${PORT:8080}
+spring:
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/ordertrace}
+    username: ${DB_USER:ordertrace}
+    password: ${DB_PASSWORD:ordertrace_demo}
+    hikari:
+      connection-timeout: 3000
+      maximum-pool-size: 5
+      data-source-properties:
+        socketTimeout: 5
+        connectTimeout: 3
+  flyway:
+    schemas: ${OT_SCHEMA:ordertrace_v2}
+    default-schema: ${OT_SCHEMA:ordertrace_v2}
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+ordertrace:
+  schema: ${OT_SCHEMA:ordertrace_v2}
+  bootstrap: ${KAFKA_BOOTSTRAP:localhost:9092}
+  application-id: ${OT_APPLICATION_ID:ordertrace-live-v2}
+  raw-topic: ordertrace.events.v2
+  result-topic: ${OT_RESULT_TOPIC:ordertrace.results.v2}
+  state-dir: ${OT_STATE_DIR:.runtime/streams}
+  pipeline-enabled: true
+logging:
+  level:
+    org.apache.kafka: WARN

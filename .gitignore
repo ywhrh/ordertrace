@@ -1,0 +1,12 @@
+target/
+.idea/
+.vscode/
+*.iml
+*.swp
+*.swo
+*.swn
+.DS_Store
+.env
+*.log
+.runtime/
+dependency-check-report.*

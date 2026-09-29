@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>OrderTrace · Lifecycle explorer</title><link rel="stylesheet" href="/style.css"><script src="/app.js" defer></script></head>
+<body>
+<header><div class="brand">◈ OrderTrace <span>EVENT LIFECYCLE EXPLORER</span></div><div class="demo">SYNTHETIC DATA · LOCAL DEMO</div></header>
+<main>
+<div class="intro"><div><p class="eyebrow">FROM FRAGMENTS TO A COMPLETE STORY</p><h1>Follow every order.</h1><p>Correlate gateway, routing and exchange events in one place.</p></div><button id="refresh">↻ Refresh data</button></div>
+<p id="health" role="status">Connecting…</p><p id="error" role="alert"></p>
+<section class="panel"><div class="section-title"><h2>Parent orders</h2><span id="queried"></span></div>
+<form id="filters"><label>Root order ID<input id="rootFilter" maxlength="80" placeholder="e.g. DEMO-1001"></label><label>Authoritative status<select id="statusFilter"><option value="">All statuses</option><option>ACTIVE</option><option>UNKNOWN</option><option>FILLED</option><option>CANCELED</option><option>REJECTED</option><option>COMPLETED</option></select></label><button type="submit">Find orders</button></form>
+<div class="scroll"><table><thead><tr><th>Root order</th><th>Scepter status</th><th>Quantity</th><th>Filled</th><th>Children</th><th>Last event (UTC)</th></tr></thead><tbody id="parents"></tbody></table></div>
+<div class="pager"><button id="prevParents">← Previous</button><span id="parentPage"></span><button id="nextParents">Next →</button></div></section>
+<section id="detail" hidden>
+<div class="section-title"><h2 id="selectedRoot"></h2><span>Authoritative status and execution totals are independent</span></div>
+<div id="summary" class="cards"></div><p id="warnings" class="notice"></p>
+<div class="panel"><h2>Child orders</h2><div class="scroll"><table><thead><tr><th>Logical child ID</th><th>State</th><th>Quantity</th><th>Filled</th><th>Price</th><th>Pending / completeness</th></tr></thead><tbody id="children"></tbody></table></div><div class="pager"><button id="prevChildren">← Previous</button><span id="childPage"></span><button id="nextChildren">Next →</button></div></div>
+<div class="panel"><div class="section-title"><h2>Event timeline</h2><label>Order filter<input id="childFilter" placeholder="All parent and child events" maxlength="80"></label><button id="applyChild">Apply</button></div><p class="muted">Sorted by event time for display. Source-local sequence determines state; clocks do not establish a global order.</p><div id="events"></div><div class="pager"><button id="prevEvents">← Previous</button><span id="eventPage"></span><button id="nextEvents">Next →</button></div></div>
+</section>
+<footer>CG → Kafka → Kafka Streams → Result topic → PostgreSQL → REST API<br>Single-node demonstration. No real customers or exchange connectivity.</footer>
+</main></body></html>
