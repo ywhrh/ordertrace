@@ -75,6 +75,6 @@ Restarting the app resumes its existing processing. Replay starts a new Streams 
 
 This is a single-machine demo with fictional orders. Topics retain events for seven days; replay can only use history still available in Kafka. The reducer is capped at 500 unique events per parent. There is no real exchange connection or authentication, and Kafka-to-PostgreSQL writes are at-least-once with idempotency, not cross-system exactly-once.
 
-For the details: [running and replaying](docs/running.md) · [event rules](docs/event-model.md) · [API reference](docs/api.md) · [verification](docs/verification.md) · [dependencies](docs/dependencies.md).
+[API reference](docs/api.md) 
 
 [MIT License](LICENSE)
